@@ -4,9 +4,13 @@ include "crud.php";
 
 $crud = new Crud();
 
+
 switch ($_POST['type']) {
-
-
+    case 'inc':
+        $crud = new Crud();
+        $query = "SELECT * from authors ORDER BY Price DESC;";
+        $result = $crud->executeQuery($query);
+        break;
 
     case 'insert':
         $id = $_POST['hiddenId'];
@@ -26,9 +30,18 @@ switch ($_POST['type']) {
 
     case 'list':
         $crud = new Crud();
-        $query = "SELECT * from authors;";
+        $sort = $_POST['sort'];
+
+        if ($sort) {
+            $query = "SELECT * from authors order by id $sort, name $sort, book $sort, email $sort;";
+        } else {
+            $query = "SELECT * from authors;";
+        }
+
         $result = $crud->getData($query);
         $html = '';
+
+
         if (!empty($result)) {
             foreach ($result as $key => $value) {
                 $id = $value['id'];

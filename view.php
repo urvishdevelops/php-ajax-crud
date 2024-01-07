@@ -14,7 +14,6 @@
 
     <div class="container justify-content-center mt-5" style="margin-top: 05%">
 
-
         <!-- Add -->
 
         <form id="autorsForm" onsubmit="return false;">
@@ -45,19 +44,26 @@
             <thead>
 
                 <tr>
-                    <td>Id <a class="inc"><i class='fa fa-arrow-up'></a> <a class="dec"><i class='fa fa-arrow-down dec'></a></td>
-                    <td>Name <a class="inc"><i class='fa fa-arrow-up'></a> <a class="dec"><i class='fa fa-arrow-down dec'></a>
+                    <td>Id <a class="inc"><i class='fa fa-arrow-up'></a> <a class="dec"><i
+                                class='fa fa-arrow-down dec'></a></td>
+                    <td>Name <a class="inc"><i class='fa fa-arrow-up'></a> <a class="dec"><i
+                                class='fa fa-arrow-down dec'></a>
                     </td>
-                    <td>Book<a><i class='fa fa-arrow-up' id="inc"></a> <a><i class='fa fa-arrow-down' id="dec"></a>
+                    <td>Book<a class="inc"><i class='fa fa-arrow-up'></a> <a class="dec"><i
+                                class='fa fa-arrow-down dec'></a>
                     </td>
-                    <td>Fake Email <a><i class='fa fa-arrow-up' id="inc"></a> <a><i class='fa fa-arrow-down'
-                                id="dec"></a></td>
+                    <td>Fake Email <a class="inc"><i class='fa fa-arrow-up'></a> <a class="dec"><i
+                                class='fa fa-arrow-down dec'></a></td>
                     <td>Actions</td>
                 </tr>
             </thead>
             <tbody id="tbody">
             </tbody>
         </table>
+        <div id="target-content">loading...</div>
+
+    </div>
+    </div>
     </div>
 </body>
 <script src="index.js"></script>
