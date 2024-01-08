@@ -1,3 +1,14 @@
+<?php
+include 'crud.php';
+
+$crud = new crud();
+
+
+
+?>
+
+
+
 <html>
 
 <head>
@@ -31,6 +42,10 @@
                 <label for="fakeemial" class="form-label">Fake Email address</label>
                 <input type="email" name="fakeemail" class="form-control" id="fakeemial">
             </div>
+            <div class="mb-3">
+                <input id="uploadImage" type="file" accept="image/*" name="image" />
+                <input class="btn btn-success" type="submit" value="Upload">
+            </div>
             <button type="submit" id="autorsFormButton" class="btn btn-primary">Submit</button>
         </form>
 
@@ -58,12 +73,11 @@
                 </tr>
             </thead>
             <tbody id="tbody">
+
+
             </tbody>
         </table>
-        <div id="target-content">loading...</div>
-
-    </div>
-    </div>
+        <div id='pagination'></div>
     </div>
 </body>
 <script src="index.js"></script>

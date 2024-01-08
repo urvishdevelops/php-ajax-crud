@@ -19,7 +19,6 @@ switch ($_POST['type']) {
         $book = $_POST['book'];
 
         if (!empty($id)) {
-            // echo "We got it bro!";
             $query = "UPDATE authors SET id='$id', name='$name', book='$book', email= '$fakeemail' where id='$id';";
         } else {
             $query = "INSERT INTO authors(name, book, email)VALUES('$name', '$book', '$fakeemail');";
@@ -32,15 +31,32 @@ switch ($_POST['type']) {
         $crud = new Crud();
         $sort = $_POST['sort'];
 
+        // pagination
+        $limit = 5;
+        $page = isset($_POST['page']) ? $_POST['page'] : 1;
+
+        $htmlarr = [];
+        $html = '';
+        $pagination = "";
+
+        $start_from = ($page - 1) * $limit;
+
+        $count_users = $crud->getData("SELECT COUNT(id) FROM authors");
+        $total_rows = $crud->getData("SELECT COUNT(id) as total FROM authors");
+
+        foreach ($total_rows as $key => $value) {
+            $row_count = $value['total'];
+        }
+
+        $total_pages = ceil($row_count / $limit);
+
         if ($sort) {
-            $query = "SELECT * from authors order by id $sort, name $sort, book $sort, email $sort;";
+            $query = "SELECT * FROM authors ORDER BY id $sort, name $sort, book $sort, email $sort LIMIT $start_from, $limit";
         } else {
-            $query = "SELECT * from authors;";
+            $query = "SELECT * FROM authors LIMIT $start_from, $limit";
         }
 
         $result = $crud->getData($query);
-        $html = '';
-
 
         if (!empty($result)) {
             foreach ($result as $key => $value) {
@@ -51,11 +67,38 @@ switch ($_POST['type']) {
                 $html .= "<td>" . $value['book'] . "</td>";
                 $html .= "<td>" . $value['email'] . "</td>";
                 $html .= "<td><a class='btn btn-warning edit' id='$id'>Edit</a>|<a class='btn btn-warning delete' id='$id'>Delete</a>";
-                $html .= "<tr>";
+                $html .= "</tr>";
             }
         }
-        echo $html;
+        $htmlArr['tbody'] = $html;
+
+        $pagination .= '<ul class="pagination">';
+
+        if ($page > 1) {
+            $previous = $page - 1;
+            $pagination .= '<li class="page-item" id="1"><span class="page-link">First Page</span></li>';
+            $pagination .= '<li class="page-item" id="' . $previous . '"><span class="page-link">' . $previous . '</span></li>';
+        }
+
+        for ($i = 1; $i <= $total_pages; $i++) {
+            $active_class = ($i == $page) ? "active" : "";
+            $pagination .= '<li class="page-item ' . $active_class . '" id="' . $i . '"><span class="page-link">' . $i . '</span></li>';
+        }
+
+        if ($page < $total_pages) {
+            $next = $page + 1;
+            $pagination .= '<li class="page-item" id="' . $next . '"><span class="page-link">' . $next . '</span></li>';
+        }
+
+        $pagination .= '<li class="page-item" id="' . $total_pages . '"><span class="page-link">Last Page</span></li>';
+        $pagination .= '</ul>';
+        $htmlArr['pagination'] = $pagination;
+        echo json_encode($htmlArr);
+
+
+
         break;
+
 
 
     case 'edit':
