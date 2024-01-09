@@ -33,7 +33,7 @@ class Crud extends Dbconfig
         if ($result) {
             return $result;
         } else {
-            echo "Failed to execute";
+            echo "Failed to execute".$result; 
         }
 
     }

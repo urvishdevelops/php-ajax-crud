@@ -17,28 +17,26 @@ $(document).ready(function () {
 });
 
 
-$("#uploadImage").on("click", (e) => {
-    $.ajax({
-        type: "FILES",
-        url: "action.php",
-        data: $("#autorsForm").serialize(),
-        success: function (data) {
-            list();
-            resetForm();
-        },
-    });
-});
-
 $(function () {
     list();
-    $("#autorsFormButton").on("click", (e) => {
+    $("#autorsForm").on("submit", (e) => {
+        let formData = new FormData(document.getElementById("autorsForm"));
         $.ajax({
             type: "POST",
             url: "action.php",
-            data: $("#autorsForm").serialize(),
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
             success: function (data) {
+                let res = JSON.parse(data)
+               if (res.status==1) {
                 list();
                 resetForm();
+                toastr.success(res.message)
+               }else{
+                toastr.error(res.message)
+               }
             },
         });
     });
@@ -60,7 +58,7 @@ $(function () {
                 let id = newData["id"];
                 let email = newData["email"];
                 let book = newData["book"];
-                console.log("success-id", id);
+
                 $("#name").val(name);
                 $("#hiddenId").val(id);
                 $("#book").val(book);
@@ -101,12 +99,10 @@ $(".inc").on("click", (e) => {
 $(document).on('click', '.page-item', function () {
     let page = $(this).attr("id")
 
-    list("", page);
+    list("", page, "");
 })
 
-
-
-function list(sortType = "asc", page) {
+function list(sortType = "asc", page = 1) {
     $.ajax({
         type: "POST",
         url: "action.php",

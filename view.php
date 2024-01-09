@@ -3,8 +3,6 @@ include 'crud.php';
 
 $crud = new crud();
 
-
-
 ?>
 
 
@@ -18,7 +16,8 @@ $crud = new crud();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+<link href="toastr.css" rel="stylesheet"/>
 </html>
 
 <body>
@@ -43,8 +42,7 @@ $crud = new crud();
                 <input type="email" name="fakeemail" class="form-control" id="fakeemial">
             </div>
             <div class="mb-3">
-                <input id="uploadImage" type="file" accept="image/*" name="image" />
-                <input class="btn btn-success" type="submit" value="Upload">
+                <input id="uploadImage" type="file" name="image" />
             </div>
             <button type="submit" id="autorsFormButton" class="btn btn-primary">Submit</button>
         </form>
@@ -69,6 +67,7 @@ $crud = new crud();
                     </td>
                     <td>Fake Email <a class="inc"><i class='fa fa-arrow-up'></a> <a class="dec"><i
                                 class='fa fa-arrow-down dec'></a></td>
+                    <td>Authors Profile</td>
                     <td>Actions</td>
                 </tr>
             </thead>
@@ -80,6 +79,9 @@ $crud = new crud();
         <div id='pagination'></div>
     </div>
 </body>
-<script src="index.js"></script>
+<script src="index.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js">
 
+</script>
+<script src="toastr.js"></script>
 </html>
