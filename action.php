@@ -58,7 +58,7 @@ switch ($_POST['type']) {
             }
 
         } else {
-            $response['message'] = "Something gone wrong!";
+            $response['message'] = "Please fill up an form accurately!";
         }
 
         echo json_encode($response);

@@ -15,9 +15,13 @@ $crud = new crud();
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-<link href="toastr.css" rel="stylesheet"/>
+
+<link href="toastr.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 </html>
 
 <body>
@@ -44,7 +48,7 @@ $crud = new crud();
             <div class="mb-3">
                 <input id="uploadImage" type="file" name="image" />
             </div>
-            <button type="submit" id="autorsFormButton" class="btn btn-primary">Submit</button>
+            <button type="submit" id="autorsFormButton" class="btn btn-primary" value="Submit">Submit</button>
         </form>
 
 
@@ -80,8 +84,10 @@ $crud = new crud();
     </div>
 </body>
 <script src="index.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js">
-
 </script>
 <script src="toastr.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"
+    integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </html>

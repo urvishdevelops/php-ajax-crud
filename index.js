@@ -1,4 +1,48 @@
 $(document).ready(function () {
+
+    $('#autorsForm').validate({
+        rules: {
+            name: "required",
+            fakeemail: {
+                required: true,
+                email: true
+            },
+            book: "required",
+            image: "required"
+        }, messages: {
+            name: "Please enter your author's name!",
+            fakeemail: {
+                required: "Please enter your author's email address!",
+                fakeemail: "Please enter valid email address!"
+            },
+            book: "Enter a book by author!",
+            image: "Please upload an profile of an author!"
+        },
+        submitHandler:function(form){
+            let formData = new FormData(document.getElementById("autorsForm"));
+            $.ajax({
+                type: "POST",
+                url: "action.php",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    let res = JSON.parse(data)
+                    if (res.status == 1) {
+                        console.log("yup!");
+                        list();
+                        resetForm();
+                        toastr.success(res.message, { timeOut: 1000 })
+                    } else {
+                        toastr.error(res.message, { timeOut: 2000 })
+                    }
+                },
+            });
+        }
+
+    })
+
     $("#txtsearch").on("keyup", function () {
         let searchVal = $("#txtsearch").val();
         $.ajax({
@@ -19,27 +63,28 @@ $(document).ready(function () {
 
 $(function () {
     list();
-    $("#autorsForm").on("submit", (e) => {
-        let formData = new FormData(document.getElementById("autorsForm"));
-        $.ajax({
-            type: "POST",
-            url: "action.php",
-            data: formData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (data) {
-                let res = JSON.parse(data)
-               if (res.status==1) {
-                list();
-                resetForm();
-                toastr.success(res.message)
-               }else{
-                toastr.error(res.message)
-               }
-            },
-        });
-    });
+    // $("#autorsForm").on("submit", (e) => {
+    //     let formData = new FormData(document.getElementById("autorsForm"));
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "action.php",
+    //         data: formData,
+    //         contentType: false,
+    //         cache: false,
+    //         processData: false,
+    //         success: function (data) {
+    //             let res = JSON.parse(data)
+    //             if (res.status == 1) {
+    //                 console.log("yup!");
+    //                 list();
+    //                 resetForm();
+    //                 toastr.success(res.message, 'Turtle Bay Resort', { timeOut: 1000 })
+    //             } else {
+    //                 toastr.error(res.message, { timeOut: 2000 })
+    //             }
+    //         },
+    //     });
+    // });
 
     $(document).on("click", ".edit", function () {
         let editId = $(this).attr("id");
